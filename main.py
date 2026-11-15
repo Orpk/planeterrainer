@@ -26,14 +26,14 @@ from interface import display_results
 #   image = original resized image
 #   obstacle_mask = binary obstacle image
 
-image, obstacle_mask = process_image(
-    "images/mars_terrain.png"
-)
+image = process_image()
+for i in image:
+    obstacle_mask = image[i]
 
 
 # ============================================================
 # STEP 2: GENERATE TERRAIN GRID
-# ============================================================
+# ==========    ==================================================
 
 # Convert the image into a weighted grid.
 # Each cell represents a section of the terrain.
