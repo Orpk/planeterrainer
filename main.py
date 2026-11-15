@@ -13,7 +13,7 @@
 # Import functions from other modules.
 from image_processor import process_image
 from terrain_mapper import create_terrain_grid
-from rover_navigation import find_path, simulate_rover
+from rover_navigation import find_path
 from interface import display_results
 
 
@@ -53,10 +53,7 @@ grid = create_terrain_grid(
 
 start = (0, 0)
 
-goal = (
-    len(grid) - 1,
-    len(grid[0]) - 1
-)
+goal = (len(grid[0]) - 1, len(grid) - 1)
 
 
 # ============================================================
@@ -77,7 +74,6 @@ else:
 
     print("Initial route:", path)
 
-
     # ========================================================
     # STEP 5: SIMULATE ROVER
     # ========================================================
@@ -91,7 +87,6 @@ else:
             5: (10, 10)
         }
     )
-
 
     # ========================================================
     # STEP 6: DISPLAY RESULTS
@@ -120,7 +115,6 @@ else:
 
     for event in results["events"]:
         print("-", event)
-
 
     # Display the final terrain and travelled route.
     display_results(
