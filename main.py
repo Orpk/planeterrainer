@@ -1,3 +1,13 @@
+"""
+1. Load the terrain image.
+2. Process the image to identify obstacles.
+3. Convert the obstacle mask into a grid.
+4. Define the rover's starting position and destination.
+5. Run the A* pathfinder.
+6. Display the resulting route.
+7. Print whether a valid path was found.
+"""
+
 # main.py
 
 # Import functions from other modules.
