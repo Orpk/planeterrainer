@@ -17,77 +17,27 @@ from rover_navigation import find_path
 from interface import display_results
 
 
-# ============================================================
 # STEP 1: PROCESS IMAGE
-# ============================================================
-
-# Load the Mars terrain image.
-# The function returns:
-#   image = original resized image
-#   obstacle_mask = binary obstacle image
-
 image = process_image()
 for i in image:
     obstacle_mask = image[i]
-    
+    # STEP 2: GENERATE TERRAIN GRID
     grid = create_terrain_grid(
-    obstacle_mask,
-    rough_mask=None,
-    cell_size=10
-    )
+        obstacle_mask,
+        rough_mask=None,
+        cell_size=10)
 
-# ============================================================
-# STEP 2: GENERATE TERRAIN GRID
-# ==========    ==================================================
+    # STEP 3: DEFINE START AND DESTINATION
+    start = (0, 0)
+    goal = (len(grid[0]) - 1, len(grid) - 1)
 
-# Convert the image into a weighted grid.
-# Each cell represents a section of the terrain.
+    # STEP 4: FIND INITIAL ROUTE
+    path = find_path(grid, start, goal)
+    if path is None:
+        print("No valid route found!")
 
-
-
-# ============================================================
-# STEP 3: DEFINE START AND DESTINATION
-# ============================================================
-
-# Coordinates use (row, column).
-# These can later be selected by clicking the map.
-
-start = (0, 0)
-
-goal = (len(grid[0]) - 1, len(grid) - 1)
-
-
-# ============================================================
-# STEP 4: FIND INITIAL ROUTE
-# ============================================================
-
-path = find_path(
-    grid,
-    start,
-    goal
-)
-
-if path is None:
-
-    print("No valid route found!")
-
-else:
-
-    print("Initial route:", path)
-
-    # ========================================================
-    # STEP 5: SIMULATE ROVER
-    # ========================================================
-
-    results = simulate_rover(
-        grid,
-        path,
-        battery=100,
-        energy_per_cost=1,
-        new_obstacles={
-            5: (10, 10)
-        }
-    )
+    else:
+        print("Initial route:", path)
 
     # ========================================================
     # STEP 6: DISPLAY RESULTS
