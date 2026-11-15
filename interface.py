@@ -68,7 +68,12 @@ def display_results(img_path, grid =[[]], path =[[],[]], start = [0,0], goal = [
     plt.title("Traversal Path")    
     ax.imshow(Z, origin='upper', extent=(0, width, height, 0))
 
-    ax.imshow(cv_img, extent=[0, width, height, 0], alpha=0)
+    # ax.imshow(cv_img, extent=[0, width, height, 0], alpha=0)
+    img_plot = ax.imshow(
+    cv_img,
+    extent=[0, width, height, 0],
+    alpha=0
+)
 
     canvas = FigureCanvasTkAgg(fig, master=root)
     canvas.draw()
@@ -76,14 +81,13 @@ def display_results(img_path, grid =[[]], path =[[],[]], start = [0,0], goal = [
     # alpha
     def update_alpha(new_val):
         # retrieve frequency
-        f = 0
         f = float(new_val)
-
         # update data
-        ax.imshow(cv_img, extent=[0, width, height, 0], alpha=f*0.2)
+        img_plot.set_alpha(f * 0.2)
+        # ax.imshow(cv_img, extent=[0, width, height, 0], alpha=f*0.2)
 
         # required to update canvas and attached toolbar!
-        canvas.draw()
+        canvas.draw_idle()
 
     slider_update = tk.Scale(root, from_=1, to=5, orient=tk.HORIZONTAL,
                               command=update_alpha, label="alpha")

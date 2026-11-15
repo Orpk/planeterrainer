@@ -19,12 +19,9 @@ from interface import display_results
 
 # STEP 1: PROCESS IMAGE
 folder_path = "images"
-print(1)
 image = process_image(folder_path)
-print(2)
 print(len(image))
 for i in range(len(image)):
-    print(3)
     obstacle_mask = image[i]
     # STEP 2: GENERATE TERRAIN GRID
     grid = create_terrain_grid(
@@ -45,4 +42,3 @@ for i in range(len(image)):
         print("Initial route:", path)
 
     display_results(image[i], grid, path, start, goal)
-print(4)
