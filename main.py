@@ -38,10 +38,13 @@ image, obstacle_mask = process_image(
 # Convert the image into a weighted grid.
 # Each cell represents a section of the terrain.
 
+
 grid = create_terrain_grid(
     obstacle_mask,
+    rough_mask=None,
     cell_size=10
 )
+
 
 
 # ============================================================
