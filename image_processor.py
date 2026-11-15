@@ -43,17 +43,17 @@ def process_image():
            mask_cleaned = cv2.morphologyEx(rock_detection, cv2.MORPH_OPEN, kernel)
            mask_dilated = cv2.dilate(mask_cleaned, kernel, iterations = 1)
 
-           cv2.imshow("Original Image", resized)
+           #cv2.imshow("Original Image", resized)
            cv2.imshow("Rock Detection", mask_dilated)
 
            cv2.waitKey(0)
            cv2.destroyAllWindows()
 
-           results.append((resized, mask_dilated))
+           results.append((mask_dilated))
            
            
            
-            # TODO 6: Return image and mask.
+            
     return results
            
            
