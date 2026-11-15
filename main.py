@@ -18,8 +18,13 @@ from interface import display_results
 
 
 # STEP 1: PROCESS IMAGE
-image = process_image()
-for i in image:
+folder_path = "images"
+print(1)
+image = process_image(folder_path)
+print(2)
+print(len(image))
+for i in range(len(image)):
+    print(3)
     obstacle_mask = image[i]
     # STEP 2: GENERATE TERRAIN GRID
     grid = create_terrain_grid(
@@ -39,39 +44,5 @@ for i in image:
     else:
         print("Initial route:", path)
 
-    # ========================================================
-    # STEP 6: DISPLAY RESULTS
-    # ========================================================
-
-    print("\n--- MISSION REPORT ---")
-
-    print("Mission completed:", results["completed"])
-
-    print(
-        "Final position:",
-        results["final_position"]
-    )
-
-    print(
-        "Battery remaining:",
-        results["battery_remaining"]
-    )
-
-    print(
-        "Distance travelled:",
-        results["distance_travelled"]
-    )
-
-    print("Events:")
-
-    for event in results["events"]:
-        print("-", event)
-
-    # Display the final terrain and travelled route.
-    display_results(
-        results["final_grid"],
-        results["route_taken"],
-        start,
-        goal,
-        results["final_position"]
-    )
+    display_results(image[i], grid, path, start, goal)
+print(4)

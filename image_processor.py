@@ -6,13 +6,13 @@ import os
 
 
 
-def process_image():
+def process_image(folder_path):
 
     # Load image and check for failure.
 
     results = []
 
-    folder_path = r"/Users/taoyilei/Desktop/planeterrainer/images"
+    # folder_path = r"/Users/taoyilei/Desktop/planeterrainer/images"
     image_paths = glob.glob(os.path.join(folder_path, "*.jpg")) + \
               glob.glob(os.path.join(folder_path, "*.png"))
 
@@ -65,6 +65,6 @@ def process_image():
 
     
 
-
-results = process_image()
-print("Total images processed:", len(results))
+if __name__ == "__main__":
+    results = process_image()
+    print("Total images processed:", len(results))

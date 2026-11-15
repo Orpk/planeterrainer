@@ -27,9 +27,13 @@ def display_results(img_path, grid =[[]], path =[[],[]], start = [0,0], goal = [
     root.wm_title("Traversal path")
 
     # img
-    cv_img = cv2.imread(img_path)
+    cv_img = 0
+    if isinstance(img_path, str):
+        cv_img = cv2.imread(img_path)
+        cv_img = cv2.cvtColor(cv_img, cv2.COLOR_BGR2RGB)
     # 2. Convert BGR to RGB
-    cv_img = cv2.cvtColor(cv_img, cv2.COLOR_BGR2RGB)
+    else:
+        cv_img = cv2.cvtColor(img_path, cv2.COLOR_BGR2RGB)
 
     height, width, channels = cv_img.shape
 
@@ -55,14 +59,16 @@ def display_results(img_path, grid =[[]], path =[[],[]], start = [0,0], goal = [
     # grid plot
     plt.style.use('_mpl-gallery-nogrid')
     Z = grid
-    fig, ax = plt.subplots(figsize=(width/100, height/100), dpi=100)
-    ax.plot(path[0], path[1]) # path
-    ax.plot(start[0], start[1], 'ro', markersize=10)
-    ax.plot(goal[0], goal[1], 'go', markersize=10)
+    fig, ax = plt.subplots(figsize=(width/100,height/100), dpi=100)
+    scale = 10
+    ax.plot([x * scale + scale/2 for x in path[0]],
+    [y * scale + scale/2 for y in path[1]]) # path
+    ax.plot(start[0]*scale + scale/2, start[1]*scale + scale/2, 'ro', markersize=10)
+    ax.plot(goal[0]*scale + scale/2, goal[1]*scale + scale/2, 'go', markersize=10)
     plt.title("Traversal Path")    
-    ax.imshow(Z, origin='lower')
+    ax.imshow(Z, origin='upper', extent=(0, width, height, 0))
 
-    ax.imshow(cv_img, extent=[0, width, height, 0], alpha=0.1)
+    ax.imshow(cv_img, extent=[0, width, height, 0], alpha=0)
 
     canvas = FigureCanvasTkAgg(fig, master=root)
     canvas.draw()
@@ -70,6 +76,7 @@ def display_results(img_path, grid =[[]], path =[[],[]], start = [0,0], goal = [
     # alpha
     def update_alpha(new_val):
         # retrieve frequency
+        f = 0
         f = float(new_val)
 
         # update data
