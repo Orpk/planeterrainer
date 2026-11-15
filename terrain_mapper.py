@@ -32,30 +32,11 @@ def create_terrain_grid(obstacle_mask, rough_mask=None, cell_size=10):
         - Otherwise, assign 1.
 
     STEP 7: Return the completed terrain grid.
-
-    GUIDE:
-    https://numpy.org/doc/stable/user/quickstart.html
     """
 
 
     if obstacle_mask is None:
         raise ValueError("Obstacle mask cannot be None.")
-
-    # TODO 1: Get image height and width.
-
-    # TODO 2: Calculate grid dimensions.
-
-    # TODO 3: Initialize a 2D list filled with safe terrain (1).
-
-    # TODO 4: Loop through every grid cell.
-
-    # TODO 5: Extract the corresponding image section.
-
-    # TODO 6: Calculate the obstacle percentage.
-
-    # TODO 7: Assign terrain costs based on classification.
-
-    # TODO 8: Return the grid.
     
     height, width = obstacle_mask.shape  # Get image dimensions .shape
 

@@ -29,7 +29,12 @@ from interface import display_results
 image = process_image()
 for i in image:
     obstacle_mask = image[i]
-
+    
+    grid = create_terrain_grid(
+    obstacle_mask,
+    rough_mask=None,
+    cell_size=10
+    )
 
 # ============================================================
 # STEP 2: GENERATE TERRAIN GRID
@@ -37,13 +42,6 @@ for i in image:
 
 # Convert the image into a weighted grid.
 # Each cell represents a section of the terrain.
-
-
-grid = create_terrain_grid(
-    obstacle_mask,
-    rough_mask=None,
-    cell_size=10
-)
 
 
 
